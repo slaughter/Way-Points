@@ -4,8 +4,7 @@
 
 This is a simple addon for Garry's Mod that adds waypoints to the game. It is highly commented so it will be a very easy to edit and learn from.
 
-In the future I will make waypoints save and the marker a little bit more pretty.
-
+Way points save for each reconnection and are saved client side.
 
 It is currently using the default derma theme. I will be creating my own theme shortly.
 

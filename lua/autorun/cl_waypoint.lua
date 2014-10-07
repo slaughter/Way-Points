@@ -14,13 +14,25 @@ if SERVER then return end --None of that server shit needed yo.
 surface.CreateFont( "font", {font = "Myriad Pro", size = 28, antialias = true, } )
 
 
-
 -------------
 --VARIABLES--
 -------------
 
 ply = LocalPlayer()
-waypoints = {} --We we use this table to grab vectors.
+
+
+--LOAD SAVED WAYPOINTS
+if file.Exists("waypoints.txt", "DATA") then --Check if waypoints.txt exists
+	local wpFile = file.Read("waypoints.txt", "DATA") --Read the file
+	local json = util.JSONToTable(wpFile) --Convert the file contents from JSON to a Table
+	waypoints = json --Set waypoints table to the JSON converted from the file.
+else --If not create and populate it.
+	waypoints = {}
+	local json = util.TableToJSON(waypoints)
+	file.Write("waypoints.txt", json)
+	
+end
+
 w = ScrW()
 h = ScrH()
 
@@ -32,7 +44,7 @@ function menu()
 
 	-- BACKGROUND	
 	local background = vgui.Create("DFrame")
-	background:SetSize(370, 340)
+	background:SetSize(470, 340)
 	background:MakePopup()
 	background:SetPos(w / 2 - 250, h / 2 - 250)
 	background:SetTitle("Waypoints by fghdx | github.com/fghdx/Way-Points")
@@ -40,7 +52,7 @@ function menu()
 
 	--List that displays all Waypoints.
 	local wayPointList = vgui.Create( "DListView", background )
-	wayPointList:SetSize(250, 300)
+	wayPointList:SetSize(350, 300)
 	wayPointList:SetPos(10, 30)
 	wayPointList:AddColumn("Name")
 	wayPointList:AddColumn("Location")
@@ -51,13 +63,15 @@ function menu()
 	function refresh_list()
 		wayPointList:Clear()
 		for k, v in pairs(waypoints) do
-			wayPointList:AddLine(v['name'], v['pos'], v['color'])
+			local color = v['color']['r'] .. ", " .. v['color']['g'] .. ", " .. v['color']['b'] .. ", " .. v['color']['a']
+			local pos = math.Round(v['pos']['x']) .. ", " .. math.Round(v['pos']['y']) .. ", " .. math.Round(v['pos']['z'])
+			wayPointList:AddLine(v['name'], pos, color)
 		end
 	end
 
 	-- Button to add waypoint.
 	local addWP = vgui.Create("DButton", background)
-	addWP:SetPos(265, 30)
+	addWP:SetPos(365, 30)
 	addWP:SetSize(100, 25)
 	addWP:SetText("Add Way Point")
 	addWP.DoClick = function()
@@ -102,7 +116,11 @@ function menu()
 			--If not display an error message.
 			if text:GetText() != "" then
 				--Insert into waypoints table the name and vector for waypoint.
-				table.insert(waypoints, {name=text:GetText(), pos=Vector(ply:GetPos()[1], ply:GetPos()[2], ply:GetPos()[3]), color=Color(color:GetColor().r, color:GetColor().g, color:GetColor().b, color:GetColor().a)})
+				table.insert(waypoints, {name=text:GetText(), pos=Vector(LocalPlayer():GetPos()[1], LocalPlayer():GetPos()[2], LocalPlayer():GetPos()[3]), color=Color(color:GetColor().r, color:GetColor().g, color:GetColor().b, color:GetColor().a)})
+
+				--save to file
+				local json = util.TableToJSON(waypoints) --Turn the table to JSON to save it.
+				file.Write("waypoints.txt", json) --Write the table to waypoints.txt.
 
 				--Refresh the list to add the new item.
 				refresh_list()
@@ -118,7 +136,7 @@ function menu()
 
 	--Remove waypoint button.
 	local removeWP = vgui.Create("DButton", background)
-	removeWP:SetPos(265, 57)
+	removeWP:SetPos(365, 57)
 	removeWP:SetSize(100, 25)
 	removeWP:SetText("Remove Selected")
 	removeWP.DoClick = function()
