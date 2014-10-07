@@ -13,10 +13,10 @@ It is currently using the default derma theme. I will be creating my own theme s
 ###Pictures:
 ---  
 Main Interface  
-![alt text](https://github.com/fghdx/Way-Points/screenshots/main_interface.png "Main Interface")  
+![alt text](https://raw.githubusercontent.com/fghdx/Way-Points/master/screenshots/main_interface.png "Main Interface")  
   
   Create Waypoints  
-![alt text](https://github.com/fghdx/Way-Points/screenshots/create_interface.png "Create Waypoint")  
+![alt text](https://raw.githubusercontent.com/fghdx/Way-Points/master/screenshots/create_interface.png "Create Waypoint")  
   
   Waypoints Ingame  
-![alt text](https://github.com/fghdx/Way-Points/screenshots/ingame.jpg "Waypoints Ingame")
+![alt text](https://raw.githubusercontent.com/fghdx/Way-Points/master/screenshots/ingame.jpg "Waypoints Ingame")
