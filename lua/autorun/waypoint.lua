@@ -158,10 +158,8 @@ function menu()
 			
 
 				table.remove(waypoints, k)
-				print("true")
 			end
 
-			print(v['pos'], "|",pos)
 		end
 
 		--save to file
