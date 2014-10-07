@@ -1,4 +1,13 @@
-if SERVER then return end
+if SERVER then return end --None of that server shit needed yo.
+--[[
+	
+	WayPoints made by fghdx.
+	Steam: http://steamcommunity.com/id/sedsdjdgf/
+	GitHub: https://github.com/fghdx/Way-Points
+
+]]--
+
+
 ---------
 --FONTS--
 ---------

@@ -10,6 +10,14 @@ In the future I will make waypoints save and the marker a little bit more pretty
 It is currently using the default derma theme. I will be creating my own theme shortly.
 
 ---
+###How to use?
+---
+To install download [the zip](https://github.com/fghdx/Way-Points/archive/master.zip) and extract into your ```GarrysMod/garrysmod/addons``` folder.
+
+In game all you need to do is use the console command "waypoints_menu" to open up the menu. If you are going to be using it a lot I suggest binding it to a key with:   
+```bind [key] waypoints_menu```
+
+---
 ###Pictures:
 ---  
 Main Interface  
@@ -20,3 +28,4 @@ Main Interface
   
   Waypoints Ingame  
 ![alt text](https://raw.githubusercontent.com/fghdx/Way-Points/master/screenshots/ingame.jpg "Waypoints Ingame")
+---
