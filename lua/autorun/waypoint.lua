@@ -57,15 +57,16 @@ function menu()
 	wayPointList:AddColumn("Name")
 	wayPointList:AddColumn("Location")
 	wayPointList:AddColumn("Color")
+	wayPointList:SetMultiSelect(false)
 	--
 
 	--Function to refresh items on wayPointList.
 	function refresh_list()
 		wayPointList:Clear()
 		for k, v in pairs(waypoints) do
-			local color = v['color']['r'] .. ", " .. v['color']['g'] .. ", " .. v['color']['b'] .. ", " .. v['color']['a']
-			local pos = math.Round(v['pos']['x']) .. ", " .. math.Round(v['pos']['y']) .. ", " .. math.Round(v['pos']['z'])
-			wayPointList:AddLine(v['name'], pos, color)
+			local printColor = v['color']['r'] .. ", " .. v['color']['g'] .. ", " .. v['color']['b'] .. ", " .. v['color']['a']
+			local printPos = math.Round(v['pos']['x']) .. ", " .. math.Round(v['pos']['y']) .. ", " .. math.Round(v['pos']['z'])
+			wayPointList:AddLine(v['name'], printPos, printColor)
 		end
 	end
 
@@ -148,12 +149,25 @@ function menu()
 
 		--Go through each item of the Waypoint list.
 		for k, v in pairs(waypoints) do
+			
+		roundedPos = math.Round(v['pos']['x']) .. ", " .. math.Round(v['pos']['y']) .. ", " .. math.Round(v['pos']['z'])
+
 			--If the name and pos are the same as the line
 			--remove them.
-			if v['name'] == name and v['pos'] == pos then
+			if v['name'] == name and roundedPos == pos then
+			
+
 				table.remove(waypoints, k)
+				print("true")
 			end
+
+			print(v['pos'], "|",pos)
 		end
+
+		--save to file
+		local json = util.TableToJSON(waypoints) --Turn the table to JSON to save it.
+		file.Write("waypoints.txt", json) --Write the table to waypoints.txt.
+
 		--Refresh the list to get the new values.
 		refresh_list()
 
