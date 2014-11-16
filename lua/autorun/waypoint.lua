@@ -76,7 +76,7 @@ function menu()
 	addWP:SetSize(100, 25)
 	addWP:SetText("Add Way Point")
 	addWP.DoClick = function()
-		
+
 		--We need to create a window
 		--All this needs is a text entery for the name,
 		--and a button to add the entry to the waypoint list..
@@ -100,7 +100,7 @@ function menu()
 		local colorLbl = vgui.Create("DLabel", frame)
 		colorLbl:SetText("Color:")
 		colorLbl:SetPos(5, 68)
-	
+
 		--Create Color Selector
 		local color = vgui.Create( "DColorMixer", frame);
 		color:SetSize( 290, 160);
@@ -112,7 +112,7 @@ function menu()
 		button:SetSize(290, 20)
 		button:SetText("Add Way Point")
 		button.DoClick = function()
-			
+
 			--Only insert into table if there is text in the text box.
 			--If not display an error message.
 			if text:GetText() != "" then
@@ -131,7 +131,7 @@ function menu()
 				Derma_Message("Please add a name!", "Error:", "Close")
 			end
 
-			end
+		end
 	end
 	--
 
@@ -142,7 +142,7 @@ function menu()
 	removeWP:SetText("Remove Selected")
 	removeWP.DoClick = function()
 
-		
+
 		line = wayPointList:GetSelectedLine() --Get selected line number
 		name = wayPointList:GetLine(line):GetValue(1) --Get name
 		pos = wayPointList:GetLine(line):GetValue(2) --Get Pos
@@ -150,12 +150,12 @@ function menu()
 		--Go through each item of the Waypoint list.
 		for k, v in pairs(waypoints) do
 			
-		roundedPos = math.Round(v['pos']['x']) .. ", " .. math.Round(v['pos']['y']) .. ", " .. math.Round(v['pos']['z'])
+			roundedPos = math.Round(v['pos']['x']) .. ", " .. math.Round(v['pos']['y']) .. ", " .. math.Round(v['pos']['z'])
 
 			--If the name and pos are the same as the line
 			--remove them.
 			if v['name'] == name and roundedPos == pos then
-			
+
 
 				table.remove(waypoints, k)
 			end
